@@ -21,4 +21,3 @@ NODE_ENV = "development"
 [[kv_namespaces]]
 binding = "POSTS"
 id = "2d1e2a90e7b2423b8b195ea4489cb641"
-preview_id = "2d1e2a90e7b2423b8b195ea4489cb641"

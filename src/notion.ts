@@ -78,4 +78,3 @@ function simplifyNotionProperty<R>(value: Record<string, any> | any): R {
   }
   return value[value.type]
 }
-

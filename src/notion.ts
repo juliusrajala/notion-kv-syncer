@@ -9,8 +9,6 @@ const getClient = () => {
   return client
 }
 
-// https://www.notion.so/juliuksennotion/fbeabcb601ae4649a099635d7ac10023?v=67d4b2f0465f4829b12930d63bc1491c
-
 interface Post {
   visibility: Record<string, any> | null
   tags: Array<Record<string, any>>
@@ -39,7 +37,7 @@ const fetchPageData = async (
   }
 }
 
-export const getPosts = async (): Promise<any[]> => {
+export const getPosts = async (): Promise<WithContent[]> => {
   const client = getClient()
   const { results } = await client.databases.query({
     database_id: NOTION_DB_ID,
@@ -69,7 +67,7 @@ export const getPosts = async (): Promise<any[]> => {
   })
 
   const withContent = parsed.map((post) => fetchPageData(post, client))
-  const posts = await Promise.all(withContent) //.map((p) => validatePost(p)).filter(Boolean) as any[];
+  const posts = await Promise.all(withContent)
 
   return posts
 }
@@ -81,11 +79,3 @@ function simplifyNotionProperty<R>(value: Record<string, any> | any): R {
   return value[value.type]
 }
 
-// export const getPost = async (pageId: string) => {
-//const markdownClient = new NotionToMarkdown({ notionClient: getClient() });
-//   const mdBlocks = await markdownClient.pageToMarkdown(pageId);
-//   const post = markdownClient.toMarkdownString(mdBlocks);
-
-//   const html = marked(post);
-//   return html;
-// };
